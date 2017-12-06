@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tejasvi's Pizza Shop</title>
+    <meta name="description" content="Free Bootstrap Theme by BootstrapMade.com">
+    <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
+    
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Satisfy|Bree+Serif|Candal|PT+Sans">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- =======================================================
+        Theme Name: Tejasvi's Pizza shop
+        Author: Tejasvi Srigiriraju
+    ======================================================= -->
+  
+  <script type="text/javascript">
+
+function ischecked(){
+	
+	//--------------------------checking pizza size------------------------------
+		
+		var psize = document.getElementsByName('Size');
+		var hassizeSelected = false;
+		
+		var i =0;
+		for(; i < psize.length; i++){
+			if(psize[i].checked) { hassizeSelected = true; break; }
+			
+		}
+	
+		if(hassizeSelected == false){
+			alert('Please enter the size of the pizza!');
+			return false;
+		}
+
+	//---------------------------checking pizza sauce-----------------------------------
+	/*	var pesto = document.getElementById('pesto').checked;
+		var Bechamel = document.getElementById('Bechamel').checked;
+		var Salsa = document.getElementById('Salsa').checked;
+		var BBQ = document.getElementById('BBQ').checked;
+		var Hummus = document.getElementById('Hummus').checked;
+		
+		if(pesto == false && Bechamel == false && Salsa == false && BBQ == false && Hummus==false ){
+			alert('Please enter sauce for the pizza!');
+			return false;
+		}
+		*/	
+		var psauce = document.getElementsByName('Sauce');
+		var hasSauceSelected = false;
+		
+		var j =0;
+		for(; j < psauce.length; j++){
+			if(psauce[j].checked) { hasSauceSelected = true; break; }
+			
+		}
+	
+		if(hasSauceSelected == false){
+			alert('Please enter sauce for the pizza!');
+			return false;
+		}
+			
+	
+	//---------------------------checking pizza cheese----------------------------------
+	
+		var pcheese = document.getElementsByName('Cheese');
+		var hasCheeseSelected = false;
+		
+		var k =0;
+		for(; k < pcheese.length; k++){
+			if(pcheese[k].checked) { hasCheeseSelected = true; break; }
+			
+		}
+	
+		if(hasCheeseSelected == false){
+			alert('Please enter cheese for the pizza!');
+			return false;
+		}
+				
+	//---------------------------checking pizza toppings----------------------------------
+	
+		var toppings = document.getElementsByName('Toppings');
+		var hastopSelected = false;
+		var count=0;
+		
+		for(var i=0; i < toppings.length; i++){
+			if(toppings[i].checked) count++;
+			if(count==2) { hastopSelected = true; break; }
+		}
+	
+		if(hastopSelected == false){
+			alert('Please select atleast 2 topping for your pizza!');
+			return false;
+		}
+		
+		//---------------------------checking delivery type-----------------------------------
+		/*
+		var deliveryoption = document.getElementById('Order Type').value;	
+	
+		if(deliveryoption == "Option"){
+			alert('Please select delivery type for your pizza !');
+			return false;
+		} */
+		
+		
+		//returns true if all are checked
+		return true;
+	
+}//end of ischecked function
+
+function updateTotal(){
+	//alert('in updateTotal');
+	// pricerows
+	//---------------------------Adding size to order table--------------------------
+	var priceTable ="" ;//=  "<tr><td></td></tr>";
+	var Total = 0;
+
+	var psize = document.getElementsByName('Size');
+	var hasSizeSelected = false;
+	
+	var i =0;
+	for(; i < psize.length; i++){
+		if(psize[i].checked) {
+			hasSizeSelected = true;
+			priceTable += "<tr><td> <address><strong> <center> " +psize[i].name + "</address></strong> </center></td> <td><address><strong> <center> "+  psize[i].id   +"</address></strong> </center></td> <td> <address><strong> <center>" + psize[i].value +"$ </address></strong> </center></td> </tr>";
+			Total +=parseFloat(psize[i].value);
+			break; }
+		}
+
+	if(hasSizeSelected){
+	document.getElementById("pricerows").innerHTML = priceTable;
+	}
+	
+	//-----------------------------Adding sauce to order table-------------------------	
+	var psauce = document.getElementsByName('Sauce');
+	var hasSauceSelected = false;
+	
+	var k =0;
+	for(; k < psauce.length; k++){
+		if(psauce[k].checked) {
+			hasSauceSelected = true;
+			priceTable += "<tr><td> <address><strong> <center> " +psauce[k].name + "</address></strong> </center></td> <td> <address><strong> <center>"+  psauce[k].id   +"</address></strong> </center></td> <td><address><strong> <center>" + psauce[k].value +"$</address></strong> </center> </td> </tr>";
+			Total +=parseFloat(psauce[i].value);
+			break; }
+		}
+
+	if(hasSauceSelected){
+	document.getElementById("pricerows").innerHTML = priceTable;
+	}
+	
+
+	//-----------------------------Adding Cheese to order table-------------------------	
+	var pcheese = document.getElementsByName('Cheese');
+	var hasCheeseSelected = false;
+	
+	var j =0;
+	for(; j < pcheese.length; j++){
+		if(pcheese[j].checked) {
+			hasCheeseSelected = true;
+			priceTable += "<tr><td> <address><strong> <center>  " +pcheese[j].name + "</address></strong> </center></td> <td><address><strong> <center> "+  pcheese[j].id   +"</address></strong> </center></td> <td> <address><strong> <center>" + pcheese[j].value +"$ </address></strong> </center></td> </tr>";
+			Total +=parseFloat(pcheese[j].value);
+			break; 
+			}
+		}
+
+	if(hasCheeseSelected){
+	document.getElementById("pricerows").innerHTML = priceTable;
+	}
+	
+	//-------------------------------_Adding Toppings to order Table---------------------
+	
+	var pToppings = document.getElementsByName('Toppings');
+	var hasToppingsSelected = false;
+	
+	var m =0;
+	var toppingname= "";
+	var tcount =0;
+	for(; m < pToppings.length; m++){
+		//toppingname = pToppings[m].name;
+		if(pToppings[m].checked) {
+			
+			hasToppingsSelected = true;
+			if(tcount == 0){
+				tcount++;
+				priceTable += "<tr><td> <address><strong> <center> " +pToppings[m].name + "</address></strong> </center></td> <td><address><strong> <center> "+  pToppings[m].id   +"</address></strong> </center></td> <td><address><strong> <center>" + pToppings[m].value +"$ </address></strong> </center></td> </tr>";
+			}
+			else 
+				priceTable += "<tr><td>  </td> <td><address><strong> <center> "+  pToppings[m].id   +"</address></strong> </center></td> <td><address><strong> <center>" + pToppings[m].value +"$</address></strong> </center> </td> </tr>";
+			Total +=parseFloat(pToppings[m].value);
+			}
+		}
+
+	if(hasToppingsSelected){
+	document.getElementById("pricerows").innerHTML = priceTable;
+	}
+	 
+	//------------------------------------Adding Order Type to the Table------------------------
+	
+	var Tot = document.getElementById('TotalOrder');
+	Tot.value = Total;
+	document.getElementById("pricefoot").innerHTML = "<tr><td></td><td><address><strong> <center>Total(without Taxes)</address></strong> </center></td><td><address><strong> <center>" + Total + "$ </address></strong> </center>  </td></tr>";
+	
+	
+	
+	// Check browser support
+	if (typeof(Storage) !== "undefined") {
+	    // Store
+	    localStorage.setItem("Total", Total);
+	    // Retrieve
+	    //document.getElementById("result").innerHTML = localStorage.getItem("lastname");
+	} else {
+	    document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+	}
+	
+	
+
+}
+</script>
+  
+  
+  </head>
+  <body>
+	  
+    <!--banner-->
+    <section id="banner">
+		
+      <div class="bg-color">
+     
+        <div class="container">
+			<form action="login.php">
+			<input type="submit" class="btn btn-imfo btn-read-more" value="Login" style="vertical-align:top; float: right" >	
+			</form>
+        <div class="row">
+			
+          <div class="inner text-center">
+			 
+            <h1 class="logo-name">Tejasvi's Pizza Shop</h1>
+             <h2>Home Page</h2> 
+            <p>Pizza Right Away!!</p>
+
+          </div> 
+        </div>
+        </div>
+      </div>
+    </section>
+    <!-- / banner -->
+    <!--about -->
+    <section id="about" class="section-padding">
+    <div class="content-holder">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center marb-35">
+                    <h1 class="header-h">Customize your pizza</h1>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="about-info">
+                            <h2 class="heading">Pizza size</h2>
+                            
+                                                      
+                            
+             <form method="post" action ="submission.php" onsubmit="return ischecked();">
+             
+             <!-- selecting pizza size -->  
+			<label class="radio-inline">
+			<input type="radio" name="Size" id="Small" value = "51" onchange="updateTotal()"> 
+			<address> <strong>  Small </strong> </address> 
+			</label>
+			<label class="radio-inline">
+			<input type="radio" name="Size" id="Medium " value = "61" onchange="updateTotal()">
+			<address><strong> Medium  </address> </strong>
+			</label>  
+			<label class="radio-inline">
+			<input type="radio" name="Size" id="Large " value = "71" onchange="updateTotal()">
+			<address><strong> Large  </address> </strong>
+			</label> 
+			
+			
+			
+			<!-- selecting pizza sauce -->  
+			 <h2 class="heading">Pizza Sauce</h2>
+			<label class="radio-inline">
+			<input type="radio" name="Sauce" id="Pesto" value = "2" onchange="updateTotal()">
+			<address><strong> Pesto  </address> </strong>
+			</label> 
+			<label class="radio-inline">
+			<input type="radio" name="Sauce" id="Bechamel" value = "2" onchange="updateTotal()">
+			<address><strong> Bechamel  </address> </strong>
+			</label> 
+			<label class="radio-inline">
+			<input type="radio" name="Sauce" id="Salsa" value = "2" onchange="updateTotal()">
+			<address><strong> Salsa  </address> </strong>
+			</label> 
+			<label class="radio-inline">
+			<input type="radio" name="Sauce" id="BBQ" value = "2" onchange="updateTotal()">
+			<address><strong> Barbaque  </address> </strong>
+			</label> 
+			<label class="radio-inline">
+			<input type="radio" name="Sauce" id="Hummus" value = "2" onchange="updateTotal()">
+			<address><strong> Hummus  </address> </strong>
+			</label> 
+			
+			
+			<!-- selecting pizza cheese -->  
+			<h2 class="heading">Pizza Cheese </h2>
+			</label> 
+			<label class="radio-inline">
+			<input type="radio" name="Cheese" id="Provolone" value = "2" onchange="updateTotal()">
+			<address><strong> Provolone  </address> </strong>
+			</label> 
+			</label> 
+			<label class="radio-inline">
+			<input type="radio" name="Cheese" id="Cheddar" value = "2.5" onchange="updateTotal()">
+			<address><strong> Cheddar  </address> </strong>
+			</label> 
+			</label> 
+			<label class="radio-inline">
+			<input type="radio" name="Cheese" id="Parmesan" value = "2.5" onchange="updateTotal()">
+			<address><strong> Parmesan  </address> </strong>
+			</label> 
+			
+			<!-- selecting pizza Toppings --> 
+			<h2 class="heading">Pizza Toppings </h2>
+			<div  id = "appetizers" class="tab-pane fade in active"> 
+							<div class="mix category-1 menu-restaurant">
+								<div class="checkbox">
+								<span class="clearfix">
+								
+									<label><input type="checkbox" id="Pepperoni" name = "Toppings" value="1.5" onchange="updateTotal()"/>
+								<b class="menu-title">Pepperoni</b></label><br>
+								
+								<label><input type="checkbox" id="Sausage" name = "Toppings" value="1.5" onchange="updateTotal()"/>
+								<b class="menu-title">Sausage</b> </label> <br>
+								
+								<label><input type="checkbox" id="Mushrooms" name = "Toppings" value="1" onchange="updateTotal()" />
+								<b class="menu-title">Mushrooms  </b> </label><br>
+								
+								<label><input type="checkbox" id="Onions" name = "Toppings" value="1" onchange="updateTotal()"/>
+								<b class="menu-title">Onions</b> </label>
+								
+								<label><input type="checkbox" id="Green peppers" name = "Toppings" value="1" onchange="updateTotal()"/>
+								<b class="menu-title">Green peppers </b></label>
+								
+								<label><input type="checkbox" id="Tamato" name = "Toppings" value="1" onchange="updateTotal()"/>
+								<b class="menu-title">Tomato</b> </label><br>
+								
+								<label><input type="checkbox" id="Extra cheese" name = "Toppings" value="0.75" onchange="updateTotal()"/>
+								<b class="menu-title">Extra cheese</b> </a></label>
+									
+									
+								</span>
+								</div>
+							</div> 
+			</div>
+		<input type="hidden" id = "TotalOrder" />
+		<h2> <center> Order List </center> </h2>
+		<table  class="table table-condensed" border="1" width="60%">
+		<thead>
+		<tr>
+		<th> <h2> <center> </center> </h2>  </th>
+		<th> <h2> <center> Item </center> </h2>  </th>
+		<th> <h2> <center>  Price <center> </h2> </th>
+		</tr>
+		</thead>
+		<tbody id = "pricerows"></tbody>
+		<tfoot id = "pricefoot"></tfoot>
+		</table>
+		 <div>	 <button class = "btn btn-imfo btn-read-more" 	type="submit" value = "Proceed to checkout" >
+			Proceed to checkout </button> </div>
+			</form>
+		                </div>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+        </div>
+        </div>
+        
+        
+	
+		<br> <br>
+        
+    </section>
+    
+    <!-- footer -->
+    <footer class="footer text-center">
+        <div class="footer-top">
+            <div class="row">
+                <div class="col-md-offset-3 col-md-6 text-center">
+                    <div class="widget">
+                        <h4 class="widget-title">Tejasvi's Pizza Shop</h4>
+                        <address>Created by Tejasvi Srigiriraju </address>
+                        
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- / footer -->
+    
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.mixitup.min.js"></script>
+    <script src="js/custom.js"></script>
+    
+    
+</body>
+</html>
